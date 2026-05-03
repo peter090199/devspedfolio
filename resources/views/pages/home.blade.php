@@ -113,16 +113,16 @@
 
             <!-- BUTTONS -->
             <div class="flex flex-wrap gap-4 pt-4 reveal-up">
-
-                <a href="/projects"
+                    <a href="/projects"
                     class="bg-cyan-600 hover:bg-cyan-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold transition hover:-translate-y-1 hover:shadow-lg">
                     VIEW PROJECTS
                 </a>
-
-                <a href="{{ asset('assets/docs/resume.pdf') }}" download
+                <a href="/download-cv"
+                    id="downloadCv"
                     class="border border-gray-400/30 dark:border-white/10 px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-adaptive hover:bg-white/5 transition">
                     DOWNLOAD CV
                 </a>
+
 
             </div>
 
@@ -167,6 +167,24 @@
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
 <script>
+    document.getElementById("downloadCv").addEventListener("click", function(e) {
+        e.preventDefault();
+
+        fetch(this.href)
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "resume.pdf";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            });
+    });
+
+
     /* TYPED */
     new Typed('#typed-text', {
         strings: [
