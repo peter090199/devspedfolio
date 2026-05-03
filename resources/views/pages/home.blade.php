@@ -142,7 +142,6 @@
                 $years = (int) $startDate->diffInYears(now());
                 $months = (int) ($startDate->diffInMonths(now()) % 12);
                 @endphp
-
                 <div class="flex items-center gap-3">
 
                     <div class="text-adaptive font-black text-lg">
